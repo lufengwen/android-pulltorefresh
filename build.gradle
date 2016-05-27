@@ -1,0 +1,73 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jfrog.bintray'
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'library-refresh'
+
+    publishedGroupId = 'com.lufengwen.library-refresh'
+    libraryName = 'library-refresh'
+    artifact = 'library-refresh'
+
+    libraryDescription = 'A libray for pull to refresh on android.'
+
+    siteUrl = 'http://git.oschina.net/lufengwen/library-refresh'
+    gitUrl = 'https://git.oschina.net/lufengwen/library-refresh.git'
+
+    libraryVersion = '1.0.1'
+
+    developerId = 'lufengwen'
+    developerName = 'lufengwen'
+    developerEmail = 'lufengwen@outlook.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = ['src/main/java']
+            resources.srcDirs = ['src/main/java']
+            aidl.srcDirs = ['src/main/aidl']
+            renderscript.srcDirs = ['src/main/java']
+            res.srcDirs = ['src/main/res']
+            assets.srcDirs = ['src/main/assets']
+            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
+    }
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+        ignoreWarnings true
+        disable 'MissingTranslation'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+}
+
+apply from: 'gradle/install.gradle'
+apply from: 'gradle/bintray.gradle'
